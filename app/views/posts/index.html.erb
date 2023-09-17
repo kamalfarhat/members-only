@@ -1,0 +1,17 @@
+<ul>
+<% @post.each do |post| %>
+    <li>
+        <%= link_to post.title, post %>
+        <% author_id = post.user_id %>
+        <% if user_signed_in? %>
+        <span>Posted by: <%= User.find(author_id).email %></span>
+        <% end %> 
+    </li>
+<% end %>
+</ul>
+<%= link_to "New Post", new_post_path %>
+<% if !user_signed_in? %>
+<%= link_to "Sign In", new_user_session_path %>
+<% else %>
+<%= link_to "Sign Out", destroy_user_session_path %>
+<% end %>
